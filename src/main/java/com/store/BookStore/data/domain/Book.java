@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -14,7 +15,7 @@ public class Book {
     private @Id @GeneratedValue Long id;
     private String title;
     private String author;
-    private double price;
+    private BigDecimal price;
     private String category;
     private String image;
     private int quantity;
@@ -23,7 +24,7 @@ public class Book {
 
     public Book(){}
 
-    public Book(String title, String author, double price, String category, int quantity, String image){
+    public Book(String title, String author, BigDecimal price, String category, int quantity, String image){
         this.title = title;
         this.author = author;
         this.price = price;
@@ -31,7 +32,7 @@ public class Book {
         this.image = image;
         this.quantity = quantity;
     }
-    public Book(String title, String author, double price, String category, String image, int quantity, List<Comment> comments){
+    public Book(String title, String author, BigDecimal price, String category, String image, int quantity, List<Comment> comments){
         this.title = title;
         this.author = author;
         this.price = price;
@@ -39,5 +40,19 @@ public class Book {
         this.image = image;
         this.quantity = quantity;
         this.comments = comments;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        return id.equals(book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

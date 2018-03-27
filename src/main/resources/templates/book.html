@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <div th:replace="/fragments/header :: header"/>
 </head>
@@ -16,6 +16,10 @@
         <h1 th:text="${book.price}"></h1>
         <h1 th:text="${book.image}"></h1>
         <h1 th:text="${book.quantity}"></h1>
+        <a th:href="@{'/shoppingCart/addBook/{id}'(id=${book.id})}" class="col-md-1"
+           sec:authorize="isAuthenticated()" th:if="${book.quantity}>0">
+            <button type="button" class="btn btn-primary" th:text="Buy">Buy</button>
+        </a>
         <a th:href="@{'/book/' + ${book.id} + '/comment'}">Make comment</a>
         <a th:href="@{'/book/' + ${book.id} + '/comments'}">View comments</a>
     </div>
