@@ -15,10 +15,7 @@
         <div class="row panel-footer">
             <div th:inline="text" class="col-md-2">Price: [[${book.price}]] $</div>
             <div th:inline="text" class="col-md-9">In Stock: [[${book.quantity}]]</div>
-            <a th:href="@{'/shoppingCart/addProduct/{id}'(id=${book.id})}" class="col-md-1"
-               sec:authorize="isAuthenticated()" th:if="${book.quantity}>0">
-                <button type="button" class="btn btn-primary" th:text="Buy">Buy</button>
-            </a>
+            <a th:href="@{/book(bookId=${book.id})}" class="btn glyphicon glyphicon-music">See more</a>
         </div>
         <br></br>
     </div>

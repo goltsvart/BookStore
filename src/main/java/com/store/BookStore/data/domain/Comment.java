@@ -12,14 +12,16 @@ import javax.persistence.ManyToOne;
 public class Comment {
     private @Id @GeneratedValue Long id;
     private int rating;
-    private String comment;
+    private String message;
 
     @ManyToOne
     private User user;
 
-    public Comment(int rating, String comment, User user) {
+    public Comment() { }
+
+    public Comment(int rating, String message, User user) {
         this.rating = rating;
-        this.comment = comment;
+        this.message = message;
         this.user = user;
     }
 }

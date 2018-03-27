@@ -26,5 +26,9 @@ public class BookServiceImpl implements BookService{
     public Optional<Book> findById(Long id) {
         return bookRepository.findById(id);
     }
+
+    public Book findBookById(long id){
+        return bookRepository.findBookById(id);
+    }
 }
 

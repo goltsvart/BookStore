@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="/fragments/header :: header"/>
+</head>
+
+<body>
+
+<div th:replace="/fragments/header :: navbar"/>
+
+<div class="container">
+
+    <div class="panel-default well" th:object="${book}">
+        <h1 th:text="${book.title}"></h1>
+        <h1 th:text="${book.author}"></h1>
+        <h1 th:text="${book.price}"></h1>
+        <h1 th:text="${book.image}"></h1>
+        <h1 th:text="${book.quantity}"></h1>
+        <a th:href="@{'/book/' + ${book.id} + '/comment'}">Make comment</a>
+        <a th:href="@{'/book/' + ${book.id} + '/comments'}">View comments</a>
+    </div>
+
+</div>
+
+
+</body>
+</html>
+

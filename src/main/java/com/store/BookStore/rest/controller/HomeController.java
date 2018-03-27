@@ -7,10 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Controller
@@ -41,5 +46,10 @@ public class HomeController {
         modelAndView.addObject("pager", pager);
         modelAndView.setViewName("/home");
         return modelAndView;
+    }
+    @RequestMapping(value = "/book", method = RequestMethod.GET)
+    public String displayBook(ModelMap model, HttpServletRequest req, @RequestParam("bookId") String bookId) throws Exception {
+        model.put("book", bookService.findBookById(Long.valueOf(bookId)));
+        return "book";
     }
 }
