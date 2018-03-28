@@ -19,20 +19,22 @@ public class Book {
     private String category;
     private String image;
     private int quantity;
+    private String subject;
     @OneToMany
     private List<Comment> comments;
 
     public Book(){}
 
-    public Book(String title, String author, BigDecimal price, String category, int quantity, String image){
+    public Book(String title, String author, BigDecimal price, String category, int quantity, String image, String subject){
         this.title = title;
         this.author = author;
         this.price = price;
         this.category = category;
         this.image = image;
         this.quantity = quantity;
+        this.subject = subject;
     }
-    public Book(String title, String author, BigDecimal price, String category, String image, int quantity, List<Comment> comments){
+    public Book(String title, String author, BigDecimal price, String category, String image, String subject, int quantity, List<Comment> comments){
         this.title = title;
         this.author = author;
         this.price = price;
@@ -40,6 +42,7 @@ public class Book {
         this.image = image;
         this.quantity = quantity;
         this.comments = comments;
+        this.subject = subject;
     }
     @Override
     public boolean equals(Object o) {

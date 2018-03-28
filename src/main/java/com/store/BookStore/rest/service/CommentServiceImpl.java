@@ -8,8 +8,6 @@ import com.store.BookStore.data.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService{
