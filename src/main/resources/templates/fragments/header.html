@@ -31,6 +31,9 @@
                 <a class="navbar-brand" th:href="@{/home}">Shop</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse navbar-right">
+                <ul class="nav navbar-nav" th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}">
+                    <li class="active"><a th:href="@{/admin}">Admin page</a></li>
+                </ul>
                 <!-- show shoppingCart only if user is not yet authenticated -->
                 <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
                     <li class="active"><a th:href="@{/shoppingCart}">Shopping Cart</a></li>
