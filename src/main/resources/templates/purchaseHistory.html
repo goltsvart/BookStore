@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/header :: header"/>
+</head>
+
+<body>
+
+<div th:replace="/fragments/header :: navbar"/>
+
+<div class="container">
+
+    <p>Purchase history</p>
+
+    <body>
+    <table class="table table-striped">
+        <tr class="header">
+            <td>Id:</td>
+            <td>Total spent:</td>
+            <td>More details:</td>
+        </tr>
+        <tr th:each="purchaseHistory : ${purchaseHistories}">
+            <td th:text="${purchaseHistory.id}"></td>
+            <td th:text="${purchaseHistory.totalSpent}"></td>
+            <td><a th:href="@{'/purchaseHistoryDetails/' + ${purchaseHistory.id}}">check</a></p></td>
+        </tr>
+    </table>
+    </body>
+
+</div>
+
+<div th:replace="/fragments/footer :: footer"/>
+
+</body>
+</html>

@@ -60,6 +60,7 @@ public class HomeController {
     public ModelAndView search(@RequestParam(value = "title", required = false) String title,
                                @RequestParam(value = "author", required = false) String author,
                                @RequestParam(value = "subject", required = false) String subject,
+                               @RequestParam(value = "admin", required = false) String admin,
                                @RequestParam("page") Optional<Integer> page,
                                HttpServletRequest request) {
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
@@ -80,7 +81,11 @@ public class HomeController {
             modelAndView.addObject("books", searchResults);
         }
         modelAndView.addObject("pager", pager);
-        modelAndView.setViewName("/home");
+        if(!StringUtils.isBlank(admin)){
+            modelAndView.setViewName("/adminBooks");
+        }else{
+            modelAndView.setViewName("/home");
+        }
         return modelAndView;
     }
 }

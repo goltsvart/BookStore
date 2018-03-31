@@ -2,10 +2,7 @@ package com.store.BookStore.data.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -14,7 +11,7 @@ public class Comment {
     private int rating;
     private String message;
 
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.ALL)
     private User user;
 
     public Comment() { }

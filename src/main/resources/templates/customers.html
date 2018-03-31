@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/header :: header"/>
+</head>
+
+<body>
+
+<div th:replace="/fragments/header :: navbar"/>
+
+<div class="container">
+
+    <p>CUSTOMERS</p>
+
+    <body>
+    <table class="table table-striped">
+        <tr class="header">
+            <td>Name</td>
+            <td>Surname</td>
+            <td>Email</td>
+            <td>Username</td>
+            <td>Address</td>
+            <td>Payment method</td>
+            <td>See purchase history</td>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.surname}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.address}"></td>
+            <td th:text="${user.paymentMethod}"></td>
+            <td><p><a th:href="@{'/purchaseHistory/' + ${user.username}}" class="btn glyphicon glyphicon-edit">check</a></p></td>
+        </tr>
+    </table>
+    </body>
+
+</div>
+
+<div th:replace="/fragments/footer :: footer"/>
+
+</body>
+</html>

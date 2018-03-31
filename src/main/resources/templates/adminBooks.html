@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/header :: header"/>
+</head>
+
+<body>
+
+<div th:replace="/fragments/header :: navbar"/>
+
+<div class="container">
+    <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
+    <p>Books</p>
+    <a th:href="@{/saveBook}">Insert new book</a>
+    <form action="#" th:action="@{/search}" th:object="${book}">
+        <label>Title:</label> <input name="title" id="title"></input>
+        <label>Author:</label> <input name="author" id="author"></input>
+        <label>Subject:</label> <input name="subject" id="subject"></input>
+        <input type="hidden" name="admin" value="admin"/>
+        <select name="sort">
+            <option value="">Sort by</option>
+            <option value="title">title</option>
+            <option value="author">author</option>
+            <option value="price">price</option>
+        </select>
+        <select name="order">
+            <option value="">Order</option>
+            <option value="ascending">ascending</option>
+            <option value="descending">descending</option>
+        </select>
+        <button type="submit">SEARCH</button>
+    <table class="table table-striped">
+        <tr class="header">
+            <td>Id</td>
+            <td>Title</td>
+            <td>Author</td>
+            <td>Price</td>
+            <td>Image</td>
+            <td>Quantity</td>
+            <td>Subject</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.price}"></td>
+            <td th:text="${book.image}"></td>
+            <td th:text="${book.quantity}"></td>
+            <td th:text="${book.subject}"></td>
+            <td><a th:href="@{'/books/edit/' + ${book.id}}" class="btn glyphicon glyphicon-edit">edit</a></td>
+            <td><a th:href="@{'/books/delete/' + ${book.id}}" class="btn glyphicon glyphicon-trash">delete</a></td>
+        </tr>
+    </table>
+    </form>
+
+</div>
+
+<div th:replace="/fragments/footer :: footer"/>
+
+</body>
+</html>

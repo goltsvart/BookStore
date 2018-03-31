@@ -12,60 +12,52 @@
 
 <div class="container">
 
-    <!--Show this info message only if registered successfully-->
     <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
 
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form autocomplete="off" action="#" th:action="@{/registration}"
-                  th:object="${user}" method="post" role="form">
-
+            <form autocomplete="off" action="#" th:action="@{/editBook}"
+                  th:object="${book}" method="post" role="form">
+                <input type="hidden" name="id" th:field="*{id}"/>
                 <div class="form-group">
-                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                    <label th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
                            class="alert alert-danger"></label>
-                    <input type="text" th:field="*{name}" placeholder="Name"
+                    <input type="text" th:field="*{title}" placeholder="Title"
+                           class="form-control input-lg"/>
+                </div>
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
+                           class="alert alert-danger"></label>
+                    <input type="text" th:field="*{author}" placeholder="Author"
                            class="form-control input-lg"/>
                 </div>
 
                 <div class="form-group">
-                    <label th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"
+                    <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
                            class="alert alert-danger"></label>
-                    <input type="text" th:field="*{surname}" placeholder="Last Name"
+                    <input type="text" th:field="*{price}" placeholder="Price"
+                           class="form-control input-lg"/>
+                </div>
+
+
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('image')}" th:errors="*{image}"
+                           class="alert alert-danger"></label>
+                    <input type="text" th:field="*{image}" placeholder="Image"
                            class="form-control input-lg"/>
                 </div>
 
                 <div class="form-group">
-                    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                    <label th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"
                            class="alert alert-danger"></label>
-                    <input type="text" th:field="*{email}" placeholder="Email"
+                    <input type="text" th:field="*{quantity}" placeholder="*{quantity}"
                            class="form-control input-lg"/>
                 </div>
 
                 <div class="form-group">
-                    <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                    <label th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"
                            class="alert alert-danger"></label>
-                    <input type="text" th:field="*{username}" placeholder="Username"
-                           class="form-control input-lg"/>
-                </div>
-
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('username')}" th:errors="*{address}"
-                           class="alert alert-danger"></label>
-                    <input type="text" th:field="*{address}" placeholder="Address"
-                           class="form-control input-lg"/>
-                </div>
-
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('username')}" th:errors="*{paymentMethod}"
-                           class="alert alert-danger"></label>
-                    <input type="text" th:field="*{paymentMethod}" placeholder="Payment method"
-                           class="form-control input-lg"/>
-                </div>
-
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                           class="alert alert-danger"></label>
-                    <input type="password" th:field="*{password}" placeholder="Password"
+                    <input type="text" th:field="*{subject}" placeholder="Subject"
                            class="form-control input-lg"/>
                 </div>
 

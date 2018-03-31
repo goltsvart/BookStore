@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="/fragments/header :: header"/>
+</head>
+
+<body>
+
+<div th:replace="/fragments/header :: navbar"/>
+
+<div class="container">
+
+    <p>Purchase details</p>
+
+    <body>
+    <table class="table table-striped">
+        <tr class="header">
+            <td>Id</td>
+            <td>Book title</td>
+            <td>Book author</td>
+            <td>Quantity</td>
+        </tr>
+        <tr th:each="purchase : ${details}">
+            <td th:text="${purchase.id}"></td>
+            <td th:text="${purchase.book.title}"></td>
+            <td th:text="${purchase.book.author}"></td>
+            <td th:text="${purchase.quantity}"></td>
+        </tr>
+    </table>
+    </body>
+
+</div>
+
+<div th:replace="/fragments/footer :: footer"/>
+
+</body>
+</html>

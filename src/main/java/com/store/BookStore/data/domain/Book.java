@@ -2,10 +2,7 @@ package com.store.BookStore.data.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -16,29 +13,26 @@ public class Book {
     private String title;
     private String author;
     private BigDecimal price;
-    private String category;
     private String image;
     private int quantity;
     private String subject;
-    @OneToMany
+    @OneToMany(cascade= CascadeType.ALL)
     private List<Comment> comments;
 
     public Book(){}
 
-    public Book(String title, String author, BigDecimal price, String category, int quantity, String image, String subject){
+    public Book(String title, String author, BigDecimal price, int quantity, String image, String subject){
         this.title = title;
         this.author = author;
         this.price = price;
-        this.category = category;
         this.image = image;
         this.quantity = quantity;
         this.subject = subject;
     }
-    public Book(String title, String author, BigDecimal price, String category, String image, String subject, int quantity, List<Comment> comments){
+    public Book(String title, String author, BigDecimal price, String image, String subject, int quantity, List<Comment> comments){
         this.title = title;
         this.author = author;
         this.price = price;
-        this.category = category;
         this.image = image;
         this.quantity = quantity;
         this.comments = comments;

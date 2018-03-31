@@ -19,4 +19,10 @@ public interface BookService {
 
     List<Book> sortBookList(List<Book> list, String selectedSort, String selectedOrder);
 
+    Book saveBook(Book book);
+
+    Book editBook(Book book);
+
+    Book deleteBookById(long id);
+
 }

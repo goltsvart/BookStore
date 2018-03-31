@@ -50,6 +50,29 @@ public class BookServiceImpl implements BookService, SearchService{
         }
         return list;
     }
+
+    @Override
+    public Book saveBook(Book book) {
+        return bookRepository.saveAndFlush(book);
+    }
+
+    @Override
+    public Book editBook(Book book) {
+        Book b = bookRepository.findBookById(book.getId());
+        b.setAuthor(book.getAuthor());
+        b.setTitle(book.getTitle());
+        b.setQuantity(book.getQuantity());
+        b.setImage(book.getImage());
+        b.setSubject(book.getSubject());
+        bookRepository.save(b);
+        return b;
+    }
+
+    @Override
+    public Book deleteBookById(long id) {
+        return bookRepository.deleteById(id);
+    }
+
     public List<Book> findAll(){
        return bookRepository.findAll();
     }

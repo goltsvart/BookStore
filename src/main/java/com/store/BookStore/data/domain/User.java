@@ -17,30 +17,33 @@ public class User {
     private String password;
     private String email;
     private String username;
+    private String address;
+    private String paymentMethod;
     @ManyToMany(cascade = CascadeType.MERGE)
     private Collection<Role> roles;
     @OneToMany(cascade=CascadeType.ALL)
     private List<PurchaseHistory> purchaseHistoryList;
-    private int active;
     public User(){}
 
-    public User(String name, String surname, String password, String email, String username, Collection<Role> roles, int active){
+    public User(String name, String surname, String password, String email, String username, String address, String paymentMethod, Collection<Role> roles){
         this.name = name;
         this.surname = surname;
         this.password = password;
         this.email = email;
         this.username = username;
+        this.address = address;
+        this.paymentMethod = paymentMethod;
         this.roles = roles;
-        this.active = active;
     }
-    public User(String name, String surname, String password, String email, String username, Collection<Role> roles, int active, List<PurchaseHistory> purchaseHistoryList){
+    public User(String name, String surname, String password, String email, String username, String address, String paymentMethod, Collection<Role> roles, List<PurchaseHistory> purchaseHistoryList){
         this.name = name;
         this.surname = surname;
         this.password = password;
         this.email = email;
         this.username = username;
+        this.address = address;
+        this.paymentMethod = paymentMethod;
         this.roles = roles;
-        this.active = active;
         this.purchaseHistoryList = purchaseHistoryList;
     }
 }
