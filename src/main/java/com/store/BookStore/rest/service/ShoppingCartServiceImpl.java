@@ -77,11 +77,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         bookRepository.flush();
         books.clear();
         //create history of customer purchase
+        if(total.intValue() >= 50){
+            total = total.subtract(BigDecimal.valueOf(5));
+        }
         PurchaseHistory purchaseHistory = new PurchaseHistory(purchaseList, total);
         List<PurchaseHistory> purchaseHistoryList = new ArrayList<>();
         purchaseHistoryList.add(purchaseHistory);
         User user = userRepository.findUserByUsername(username);
-        user.setPurchaseHistoryList(purchaseHistoryList);
+        if(user.getPurchaseHistoryList() == null){
+            user.setPurchaseHistoryList(purchaseHistoryList);
+        }else{
+            user.getPurchaseHistoryList().add(purchaseHistory);
+        }
         userRepository.save(user);
     }
 

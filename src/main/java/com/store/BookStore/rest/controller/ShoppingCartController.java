@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
+
 @Controller
 public class ShoppingCartController {
 
@@ -27,6 +29,10 @@ public class ShoppingCartController {
         ModelAndView modelAndView = new ModelAndView("/shoppingCart");
         modelAndView.addObject("books", shoppingCartService.getBooksInCart());
         modelAndView.addObject("total", shoppingCartService.getTotal().toString());
+        if(shoppingCartService.getTotal().intValue() >= 50){
+            modelAndView.addObject("total", shoppingCartService.getTotal().intValue() - 5);
+            modelAndView.addObject("discount", "Discount of €5 applied.");
+        }
         return modelAndView;
     }
 
