@@ -41,7 +41,7 @@ public class HomeController {
         // param. decreased by 1.
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
-        Page<Book> books = bookService.findAllProductsPageable(new PageRequest(evalPage, 5));
+        Page<Book> books = bookService.findAllProductsPageable(new PageRequest(evalPage, 6));
         Pager pager = new Pager(books);
 
         ModelAndView modelAndView = new ModelAndView();

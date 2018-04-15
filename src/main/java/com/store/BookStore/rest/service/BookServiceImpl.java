@@ -1,7 +1,9 @@
 package com.store.BookStore.rest.service;
 
 import com.store.BookStore.data.domain.Book;
+import com.store.BookStore.data.domain.User;
 import com.store.BookStore.data.repo.BookRepository;
+import com.store.BookStore.data.repo.CommentRepository;
 import com.store.BookStore.rest.service.bookSearch.Author;
 import com.store.BookStore.rest.service.bookSearch.SearchFactory;
 import com.store.BookStore.rest.service.bookSearch.Title;
@@ -19,10 +21,12 @@ import java.util.Optional;
 @Service
 public class BookServiceImpl implements BookService, SearchService{
     private final BookRepository bookRepository;
-
     @Autowired
-    public BookServiceImpl(BookRepository bookRepository) {
+    private CommentRepository commentRepository;
+    @Autowired
+    public BookServiceImpl(BookRepository bookRepository, CommentRepository commentRepository) {
         this.bookRepository = bookRepository;
+        this.commentRepository = commentRepository;
     }
     @Override
     public Page<Book> findAllProductsPageable(Pageable pageable) {
@@ -69,8 +73,16 @@ public class BookServiceImpl implements BookService, SearchService{
     }
 
     @Override
-    public Book deleteBookById(long id) {
-        return bookRepository.deleteById(id);
+    public void deleteBookById(long id) {
+        Book book = bookRepository.findBookById(id);
+        if(book.getComments().size() > 0){
+            for(int i = 0; i < book.getComments().size(); i++){
+                book.getComments().get(i).setUser(null);
+                commentRepository.save(book.getComments().get(i));
+                commentRepository.delete(book.getComments().get(i));
+            }
+        }
+        bookRepository.delete(book);
     }
 
     public List<Book> findAll(){

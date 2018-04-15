@@ -1,6 +1,8 @@
 package com.store.BookStore.data.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,7 +18,9 @@ public class Book {
     private String image;
     private int quantity;
     private String subject;
-    @OneToMany(cascade= CascadeType.ALL)
+
+    @OneToMany(cascade = { CascadeType.ALL }, orphanRemoval=true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private List<Comment> comments;
 
     public Book(){}
@@ -47,7 +51,6 @@ public class Book {
 
         return id.equals(book.id);
     }
-
     @Override
     public int hashCode() {
         return id.hashCode();

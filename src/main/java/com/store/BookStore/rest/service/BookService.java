@@ -23,6 +23,6 @@ public interface BookService {
 
     Book editBook(Book book);
 
-    Book deleteBookById(long id);
+    void deleteBookById(long id);
 
 }

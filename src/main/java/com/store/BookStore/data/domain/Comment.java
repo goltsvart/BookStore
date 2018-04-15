@@ -1,6 +1,8 @@
 package com.store.BookStore.data.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 
@@ -11,7 +13,8 @@ public class Comment {
     private int rating;
     private String message;
 
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne(cascade = { CascadeType.ALL })
+    @NotFound(action = NotFoundAction.IGNORE)
     private User user;
 
     public Comment() { }
