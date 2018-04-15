@@ -66,7 +66,7 @@ public class HomeController {
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         String selectedSort= request.getParameter("sort");
         String selectedOrder= request.getParameter("order");
-        Page<Book> books = bookService.findAllProductsPageable(new PageRequest(evalPage, 5));
+        Page<Book> books = bookService.findAllProductsPageable(new PageRequest(evalPage, 6));
         Pager pager = new Pager(books);
 
         ModelAndView modelAndView = new ModelAndView();

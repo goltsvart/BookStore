@@ -11,7 +11,9 @@
 
 <div class="container">
     <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
-    <p>Books</p>
+    <div class="page-header">
+        <h1>Customers</h1>
+    </div>
     <a th:href="@{/saveBook}">Insert new book</a>
     <form action="#" th:action="@{/search}" th:object="${book}">
         <label>Title:</label> <input name="title" id="title"></input>
@@ -55,7 +57,6 @@
         </tr>
     </table>
     </form>
-
 </div>
 
 <div th:replace="/fragments/footer :: footer"/>

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class CommentController {
     private final CommentService commentService;
@@ -28,8 +30,9 @@ public class CommentController {
     public String comment(@ModelAttribute Comment comment, BindingResult bindingResult,
                           @RequestParam(name = "username") String username,
                           @RequestParam(name = "bookId") String bookId,
-                          ModelMap model) {
-        if (comment.getRating() == 0) {
+                          ModelMap model, HttpServletRequest request) {
+        String rating= request.getParameter("rating");
+        if (rating.equals("empty")) {
             bindingResult
                     .rejectValue("rating", "error.comment",
                             "Rating field cannot be empty.");
@@ -45,7 +48,7 @@ public class CommentController {
                             "Rating should be in the range of 1 to 5!");
             return "comment";
         }
-        Comment c = commentService.saveComment(comment, username);
+        Comment c = commentService.saveComment(comment, username, rating);
         commentService.attachCommentToBook(c, Long.valueOf(bookId));
         model.put("book", bookService.findBookById(Long.valueOf(bookId)));
         return "book";

@@ -11,22 +11,29 @@
 <div class="container">
 
     <div class="panel-default well" th:object="${book}">
-        <h1 th:text="${book.title}"></h1>
-        <h1 th:text="${book.author}"></h1>
-        <h1 th:text="${book.price}"></h1>
-        <h1 th:text="${book.image}"></h1>
-        <h1 th:text="${book.quantity}"></h1>
-        <a th:href="@{'/shoppingCart/addBook/{id}'(id=${book.id})}" class="col-md-1"
-           sec:authorize="isAuthenticated()" th:if="${book.quantity}>0">
-            <button type="button" class="btn btn-primary" th:text="Buy">Buy</button>
-        </a>
-        <a th:href="@{'/book/' + ${book.id} + '/comment'}">Make comment</a>
-        <a th:href="@{'/book/' + ${book.id} + '/comments'}">View comments</a>
+        <div class="row">
+            <div class="col-md-4">
+                <img th:src="${book.image}"/>
+            </div>
+            <div class="col-md-8">
+                <div th:inline="text">Title: [[${book.title}]]</div>
+                <div th:inline="text">Author: [[${book.author}]]</div>
+                <div th:inline="text">In stock: [[${book.quantity}]]</div>
+                <div th:inline="text">Title: [[${book.price}]] $</div>
+                <a th:href="@{'/shoppingCart/addBook/{id}'(id=${book.id})}" class="col-md-1"
+                   sec:authorize="isAuthenticated()" th:if="${book.quantity}>0"></a>
+                <p><button type="button" class="btn btn-primary">Add to shopping cart</button></p>
+            </div>
+        </div>
     </div>
-
+    <div class="panel panel-success">
+        <div class="panel-heading">COMMENTS</div>
+        <div class="panel-body">
+            <p><a th:href="@{'/book/'+ ${book.id} + '/comment'}" class="btn btn-primary" role="button">Make comment</a>
+            <p><a th:href="@{'/book/'+ ${book.id} + '/comments'}" class="btn btn-primary" role="button">View comments</a>
+        </div>
+    </div>
 </div>
-
-
 </body>
 </html>
 

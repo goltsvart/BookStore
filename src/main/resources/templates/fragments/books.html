@@ -25,19 +25,22 @@
         <option value="ascending">ascending</option>
         <option value="descending">descending</option>
     </select>
-        <button type="submit">SEARCH</button>
-    <div class="panel-default well" th:each="book : ${books}">
-        <div class="panel-heading">
-            <h1 th:text="${book.title}"></h1>
+        <button type="submit" class="btn btn-primary">SEARCH</button>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-4" th:each="book : ${books}">
+                <div class="thumbnail">
+                    <img th:src="${book.image}"/>
+                    <div class="caption">
+                        <h3 th:text="${book.author}">Author</h3>
+                        <h3 th:text="${book.title}">Title</h3>
+                        <div th:inline="text">Price: [[${book.price}]] $</div>
+                        <div th:inline="text">In Stock: [[${book.quantity}]]</div>
+                        <p><a th:href="@{'/book/'+ ${book.id}}" class="btn btn-primary" role="button">View more</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h3 th:text="${book.author}" class="panel-body">Description</h3>
-        <div class="row panel-footer">
-            <div th:inline="text" class="col-md-2">Price: [[${book.price}]] $</div>
-            <div th:inline="text" class="col-md-9">In Stock: [[${book.quantity}]]</div>
-            <a th:href="@{'/book/'+ ${book.id}}" class="btn glyphicon glyphicon-music">See more</a>
-        </div>
-        <br></br>
-    </div>
     </form>
     </div>
 </div>

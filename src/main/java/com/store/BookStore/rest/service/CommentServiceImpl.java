@@ -23,8 +23,9 @@ public class CommentServiceImpl implements CommentService{
         return commentRepository.findCommentById(id);
     }
 
-    public Comment saveComment(Comment comment, String username) {
+    public Comment saveComment(Comment comment, String username, String rating) {
         comment.setUser(userRepository.findUserByUsername(username));
+        comment.setRating(Integer.parseInt(rating));
         return commentRepository.saveAndFlush(comment);
     }
     public void attachCommentToBook(Comment comment, Long id){

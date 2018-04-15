@@ -8,10 +8,10 @@
 
 </head>
 
-<body>
+<div>
 
 <div th:replace="/fragments/header :: navbar"/>
-
+<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
@@ -19,13 +19,18 @@
     You have been logged out.
 </div>
 <form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
+    <div><label> User Name : <input type="text" class="form-control input-lg" name="username"/> </label></div>
+    <div><label> Password: <input type="password" class="form-control input-lg" name="password"/> </label></div>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <div><input type="submit" value="Login"/></div>
+    <div class="row">
+        <div class="col-sm-3" style="float: none; margin: 0 auto;">
+            <input type="submit" class="btn btn-primary" value="Login"/>
+        </div>
+    </div>
 </form>
 <div><p>Not registered?<a th:href="@{/registration}">click</a> to register.</p></div>
 
+</div>
 </div>
 
 <div th:replace="/fragments/footer :: footer"/>
