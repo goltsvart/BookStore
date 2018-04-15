@@ -46,11 +46,12 @@ public class BookServiceImpl implements BookService, SearchService{
         return searchFactory.findBooksByParams(title, author, subject);
     }
     public List<Book> sortBookList(List<Book> list, String selectedSort, String selectedOrder){
-        switch (selectedSort) {
-            case "title":  sortListByTitle(list, selectedOrder);
-            case "author":  sortListByAuthor(list, selectedOrder);
-            case "price":  sortListByPrice(list, selectedOrder);
-            default: break;
+        if(selectedSort.equals("title")){
+            sortListByTitle(list, selectedOrder);
+        }else if(selectedSort.equals("author")){
+            sortListByAuthor(list, selectedOrder);
+        }else if(selectedSort.equals("price")) {
+            sortListByPrice(list, selectedOrder);
         }
         return list;
     }
@@ -93,7 +94,7 @@ public class BookServiceImpl implements BookService, SearchService{
         if(selectedOrder.equals("ascending")){
             Collections.sort(list, Comparator.comparing(Book::getTitle));
         }else{
-            Collections.sort(list, (b1, b2) -> b2.getTitle().compareTo(b1.getTitle()));
+            Collections.sort(list, (b1, b2) -> b2.getTitle().trim().toLowerCase().compareTo(b1.getTitle().trim().toLowerCase()));
         }
     }
     public void sortListByAuthor(List<Book> list, String selectedOrder){
