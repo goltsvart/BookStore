@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("**/login"))
                 .and().authorizeRequests()
+                .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/home").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/customers").hasRole("ADMIN")
