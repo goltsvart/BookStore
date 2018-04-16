@@ -21,8 +21,9 @@
                 <div th:inline="text">In stock: [[${book.quantity}]]</div>
                 <div th:inline="text">Title: [[${book.price}]] $</div>
                 <a th:href="@{'/shoppingCart/addBook/{id}'(id=${book.id})}" class="col-md-1"
-                   sec:authorize="isAuthenticated()" th:if="${book.quantity}>0"></a>
-                <p><button type="button" class="btn btn-primary">Add to shopping cart</button></p>
+                    sec:authorize="isAuthenticated()" th:if="${book.quantity}>0">
+                    <button type="button" class="btn btn-primary" th:text="Buy">Buy</button>
+                </a>
             </div>
         </div>
     </div>

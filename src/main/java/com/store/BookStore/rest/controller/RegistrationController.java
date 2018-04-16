@@ -2,6 +2,7 @@ package com.store.BookStore.rest.controller;
 
 import com.store.BookStore.data.domain.User;
 import com.store.BookStore.rest.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -37,6 +38,30 @@ public class RegistrationController {
             bindingResult
                     .rejectValue("username", "error.user",
                             "There is already a user registered with the username provided");
+        }else if (StringUtils.isBlank(user.getUsername())) {
+            bindingResult
+                    .rejectValue("username", "error.user",
+                            "Cannot be blank!");
+        }else if (StringUtils.isBlank(user.getAddress())) {
+            bindingResult
+                    .rejectValue("address", "error.user",
+                            "Cannot be blank!");
+        }else if (StringUtils.isBlank(user.getEmail())) {
+            bindingResult
+                    .rejectValue("email", "error.user",
+                            "Cannot be blank!");
+        }else if (StringUtils.isBlank(user.getPassword())) {
+            bindingResult
+                    .rejectValue("password", "error.user",
+                            "Cannot be blank!");
+        }else if (StringUtils.isBlank(user.getSurname())) {
+            bindingResult
+                    .rejectValue("surname", "error.user",
+                            "Cannot be blank!");
+        }else if (StringUtils.isBlank(user.getPaymentMethod())) {
+            bindingResult
+                    .rejectValue("paymentMethod", "error.user",
+                            "Cannot be blank!");
         }
 
         ModelAndView modelAndView = new ModelAndView();

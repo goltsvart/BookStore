@@ -65,9 +65,9 @@ public class AdminController {
             bindingResult.rejectValue("subject", "error.book", "Subject field cannot be empty");
         }else if(StringUtils.isBlank(book.getImage())){
             bindingResult.rejectValue("image", "error.book", "Image field cannot be empty");
-        }else if(book.getPrice() == BigDecimal.ZERO){
+        }else if(book.getPrice() == BigDecimal.ZERO || book.getPrice().intValue() == 0 || String.valueOf(book.getPrice().intValue()).isEmpty()){
             bindingResult.rejectValue("price", "error.book", "Price field cannot be empty");
-        }else if(book.getQuantity() == 0){
+        }else if(book.getQuantity() == 0 || StringUtils.isBlank(String.valueOf(book.getQuantity()))){
             bindingResult.rejectValue("quantity", "error.book", "Quantity field cannot be empty");
         }
         ModelAndView modelAndView = new ModelAndView();
@@ -103,6 +103,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         bookService.deleteBookById(id);
         modelAndView.addObject("successMessage", "Book deleted successfully");
+        modelAndView.addObject("books", bookService.findAll());
         modelAndView.setViewName("/adminBooks");
         return modelAndView;
     }

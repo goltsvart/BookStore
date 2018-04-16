@@ -7,6 +7,7 @@ import com.store.BookStore.util.Pager;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,6 @@ public class HomeController {
         this.bookService = bookService;
         this.searchService = searchService;
     }
-
     @GetMapping("/home")
     public ModelAndView home(@RequestParam("page") Optional<Integer> page) {
 
@@ -76,6 +76,8 @@ public class HomeController {
         }
         if(!StringUtils.isBlank(selectedOrder) && !StringUtils.isBlank(selectedSort)){
             List<Book> sorted = bookService.sortBookList(searchResults, selectedSort, selectedOrder);
+            Page<Book> pageList = new PageImpl<>(sorted);
+            pager = new Pager(pageList);
             modelAndView.addObject("books", sorted);
         }else{
             modelAndView.addObject("books", searchResults);

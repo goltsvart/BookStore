@@ -18,4 +18,8 @@ public class LoginController {
 
         return "login";
     }
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(Model model, String error, String logout) {
+        return "logout";
+    }
 }

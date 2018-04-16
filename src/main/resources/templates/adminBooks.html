@@ -12,9 +12,9 @@
 <div class="container">
     <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
     <div class="page-header">
-        <h1>Customers</h1>
+        <h1>Books</h1>
     </div>
-    <a th:href="@{/saveBook}">Insert new book</a>
+    <p><a th:href="@{'/saveBook'}" class="btn btn-primary" role="button">Insert new book</a>
     <form action="#" th:action="@{/search}" th:object="${book}">
         <label>Title:</label> <input name="title" id="title"></input>
         <label>Author:</label> <input name="author" id="author"></input>

@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label th:if="${#fields.hasErrors('username')}" th:errors="*{paymentMethod}"
+                    <label th:if="${#fields.hasErrors('paymentMethod')}" th:errors="*{paymentMethod}"
                            class="alert alert-danger"></label>
                     <input type="text" th:field="*{paymentMethod}" placeholder="Payment method"
                            class="form-control input-lg"/>

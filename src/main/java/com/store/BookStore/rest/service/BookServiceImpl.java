@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -57,9 +58,7 @@ public class BookServiceImpl implements BookService, SearchService{
     }
 
     @Override
-    public Book saveBook(Book book) {
-        return bookRepository.saveAndFlush(book);
-    }
+    public Book saveBook(Book book) { return bookRepository.saveAndFlush(book); }
 
     @Override
     public Book editBook(Book book) {

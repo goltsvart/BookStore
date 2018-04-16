@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-public class MvcConfig implements WebMvcConfigurer {
+public class MvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfigurer{
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -15,5 +15,10 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceHandler("/webjars/**")
                 .addResourceLocations("/webjars/")
                 .resourceChain(false);
+    }
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/").setViewName("home");
     }
 }
